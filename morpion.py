@@ -27,11 +27,6 @@ def jouer_coup(coup,grille,joueur):
     return False
 
 
-    while grille2==False:
-     coup=input("Entrezvotre coup" +joueur)
-     grille2=jouer_coup(coup,grille,joueur)
-
-# crée la fonction pour verifié que la grille est pleine
 def est_pleine (grille):
     """
     fonction qui renvoie True si la grille est pleine, sinon False
@@ -43,7 +38,7 @@ def est_pleine (grille):
          return False
     return True
 
-# fonction qui permet de verifié que la grille est gagnante
+
 def est_gagnante (grille):
     """ 
     fonction qui renvoie True si la grille est gagnante sinon False
