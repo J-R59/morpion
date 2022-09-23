@@ -1,6 +1,5 @@
-from ast import While
-from telnetlib import STATUS
 
+#  crée la fonction pour afficher la grille
 
 def afficher_grille (grille):
     """
@@ -11,6 +10,7 @@ def afficher_grille (grille):
         print(grille[cle])
     print("\n")
 
+#crée la fonction pour jouer un coup
 
 def jouer_coup(coup,grille,joueur):
     """
@@ -20,13 +20,18 @@ def jouer_coup(coup,grille,joueur):
     :param joueur :(str) 0 ou X
     :return: la nouvelle grille si le coup est valide valide, false sinon.
     """
-    if coup [0] in ["A","B","C"] and 0 < int(coup[1]) <2:
+    if coup [0] in ["A","B","C"] and 0 <= int(coup[1]) <= 2:
         if grille [coup[0]][int(coup[1])]=="_":
             grille[coup[0]][int(coup[1])]=joueur
             return grille
     return False
 
 
+    while grille2==False:
+     coup=input("Entrezvotre coup" +joueur)
+     grille2=jouer_coup(coup,grille,joueur)
+
+# crée la fonction pour verifié que la grille est pleine
 def est_pleine (grille):
     """
     fonction qui renvoie True si la grille est pleine, sinon False
@@ -38,6 +43,7 @@ def est_pleine (grille):
          return False
     return True
 
+# fonction qui permet de verifié que la grille est gagnante
 def est_gagnante (grille):
     """ 
     fonction qui renvoie True si la grille est gagnante sinon False
@@ -50,7 +56,7 @@ def est_gagnante (grille):
             return True
 
     for i in range(3):
-        if grille ["A"][i]==grille["B"][i]==grille["C"][i] and grille[A][i]!="_":
+        if grille ["A"][i]==grille["B"][i]==grille["C"][i] and grille["A"][i]!="_":
             return True
 
 
@@ -62,27 +68,40 @@ def est_gagnante (grille):
     
     return False
 
-
+# création de la grille
 grille={
     "A":["_","_","_"],
     "B":["_","_","_"],
     "C":["_","_","_"]
 }
 
-afficher_grille(grille)
 
-jouer_coup ("A1", grille, "X")
-afficher_grille(grille)
-
-grille=(afficher_grille)
 fin=False
 joueur="X"
 
 while not fin:
-    afficher_grille()
-    coup=input("Entrez votre coup+joueur")
+    afficher_grille(grille)
+    coup=input("Entrez votre coup"+joueur)
     grille2= jouer_coup(coup,grille,joueur)
-
+    
     while grille2 == False:
-    coup=input("Entrez votre coup+joueur")
-    grille2=jouer_coup(coup,grille,joueur)
+        coup=input("Entrez votre coup"+joueur)
+        grille2=jouer_coup(coup,grille,joueur)
+
+    grille=grille2
+
+    gagnee= est_gagnante(grille)
+    pleine= est_pleine(grille)
+    fin= gagnee or pleine   
+     
+    if gagnee:
+        print("Victoire du joueur :" + joueur)
+    elif pleine:
+        print("égalité")
+    else:
+        if joueur=="X":
+            joueur="0"
+        else:
+            joueur="X"
+
+    
